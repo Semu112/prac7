@@ -2,41 +2,44 @@
 
 std::vector<int> QuickSort::sort(std::vector<int> list){
 
-    if(list.size() <= 1){
+    if(list.size() < 2){
         return list;
     }
 
-    int pivot;
+    int pivotIndex;
 
     if(list.size() >= 3){
-        pivot = list[3];
+        pivotIndex = 2;
     }
     else{
-        pivot = list[0];
+        pivotIndex = 0;
     }
 
     std::vector<int> list1;
     std::vector<int> list2;
 
-    for(int i = 1; i<list.size(); i++){
+    for(int i = 0; i<list.size(); i++){
 
-        if(list[i] < pivot){
+        if(i != pivotIndex){
+            if(list.at(i) <= list.at(pivotIndex)){
 
-            list1.push_back(list[i]);
+                list1.push_back(list.at(i));
 
-        }
-        else{
+            }
+            else{
 
-            list2.push_back(list[i]);
+                list2.push_back(list.at(i));
 
+            }
         }
 
     }
 
     list1 = sort(list1);
-    list2 = sort(list2);
 
-    list1.push_back(pivot);
+    list1.push_back(list.at(pivotIndex));
+
+    list2 = sort(list2);
 
     list1.insert(list1.end(), list2.begin(), list2.end());
 

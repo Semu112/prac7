@@ -1,6 +1,7 @@
 #include "Sort.h"
 #include "BubbleSort.h"
 #include "QuickSort.h"
+#include "RecursiveBinarySearch.h"
 
 #include <iostream>
 
@@ -16,9 +17,10 @@ int main(void){
 
     BubbleSort bs;
     QuickSort qs;
+    RecursiveBinarySearch rbs;
 
     //Getting all values into a vector
-    int arrList[] = {7, 6, 34636, 8, 3, 2, 1};
+    int arrList[] = {1, 1, 1, 1, 1, 1, 2};
 
     std::vector<int> list;
     for(int i = 0; i<7; i++){
@@ -28,6 +30,8 @@ int main(void){
     list = qs.sort(list);
 
     print_list(list);
+
+    std::cout << rbs.search(list, 2) << std::endl;
 
     return 0;
 }
