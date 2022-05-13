@@ -4,13 +4,14 @@
 #include "RecursiveBinarySearch.h"
 
 #include <iostream>
+#include <string>
 
 void print_list(std::vector<int> list){
-    std::cout << "[";
+    
     for(int i = 0; i<list.size(); i++){
         std::cout << " " << list[i];
     }
-    std::cout << "]" << std::endl;
+
 }
 
 int main(void){
@@ -19,19 +20,46 @@ int main(void){
     QuickSort qs;
     RecursiveBinarySearch rbs;
 
-    //Getting all values into a vector
-    int arrList[] = {1, 1, 1, 1, 1, 1, 2};
+    std::string input;
+
+    std::getline(std::cin, input);
 
     std::vector<int> list;
-    for(int i = 0; i<7; i++){
-        list.push_back(arrList[i]);
+
+    for(int i = 0; i<input.size(); i++){
+
+        if(input[i] != ' '){
+
+            int end = input.size()-1;
+            for(int j = i; j<input.size(); j++){
+
+                if(input[j] == ' '){
+                    end = j-1;
+                    break;
+                }
+
+            }
+
+            std::string n = input.substr(i, end-i+1);
+            list.push_back(std::stoi(n));
+
+            i = end + 1;
+        }
     }
+
 
     list = qs.sort(list);
 
-    print_list(list);
+    bool found = rbs.search(list, 1);
 
-    std::cout << rbs.search(list, 2) << std::endl;
+    if(found){
+        std::cout << "true";
+    }
+    else{
+        std::cout << "false";
+    }
+
+    print_list(list);
 
     return 0;
 }
